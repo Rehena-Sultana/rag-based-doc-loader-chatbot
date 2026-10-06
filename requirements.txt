@@ -1,0 +1,6 @@
+llama-index
+llama-index-llms-groq
+llama-index-embeddings-huggingface
+pdfplumber
+python-docx
+gradio
