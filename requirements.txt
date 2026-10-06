@@ -1,3 +1,4 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
 llama-index
 llama-index-llms-groq
 llama-index-embeddings-huggingface

@@ -1,7 +1,7 @@
 import gradio as gr
 from llama_index.core import VectorStoreIndex, Document  # Imports VectorStoreIndex for semantic search and Document class for text storage
 from llama_index.llms.groq import Groq  # Imports Groq language model integration from LlamaIndex
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding  # Imports HuggingFace embedding integration for free local embeddings
+from llama_index.embeddings.huggingface import HuggingFaceInferenceAPIEmbedding  # API-based embedding (saves ~500MB RAM on Render)
 from llama_index.core import Settings  # Imports Settings to configure global LlamaIndex parameters
 import os  # Imports OS module for interacting with the operating system (file paths, environment variables)
 import pdfplumber  # Imports pdfplumber library for extracting text from PDF files
@@ -73,7 +73,7 @@ def load_data(files, api_key):  # Defines function that accepts uploaded files l
         model_name = "openai/gpt-oss-20b"
         
         # Configure global LlamaIndex embedding and LLM settings
-        Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")  # Free local embedding model
+        Settings.embed_model = HuggingFaceInferenceAPIEmbedding(model_name="BAAI/bge-small-en-v1.5")  # Free API-based embeddings (lightweight)
         Settings.llm = Groq(  # Configures the global LLM (Large Language Model) settings for LlamaIndex
             model=model_name,  # Specifies the openai/gpt-oss-20b model on Groq
             temperature=0.5,  # Sets randomness level (0=deterministic/focused, 1=creative/random); 0.5 is balanced
